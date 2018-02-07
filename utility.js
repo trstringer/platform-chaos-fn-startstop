@@ -14,7 +14,8 @@ module.exports.validateParams = (req, logger) => {
 
 module.exports.parseParams = (req, logger) => {
     const accessToken = req.query.accessToken || req.body.accessToken;
-    const resourcesRaw = (req.query.resources || req.body.resources).split(',');
+    let resourcesRaw = req.query.resources || req.body.resources;
+    resourcesRaw = resourcesRaw.split(',');
     let resources = [];
 
     logger(`accessToken: ${accessToken}`);
