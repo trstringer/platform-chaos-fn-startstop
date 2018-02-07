@@ -30,7 +30,7 @@ module.exports = function (context, req) {
                 resource.subscriptionId,
                 resource.resourceGroupName,
                 resource.resourceName,
-                logger
+                context.log
         )))
             .then(() => {
                 context.log('Completed stopping websites');
