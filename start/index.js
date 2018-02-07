@@ -1,7 +1,6 @@
 const validateParams = require('../utility').validateParams;
 
 module.exports = function (context, req) {
-    testFunc(context.log);
     context.log('Beginning start of chaos event');
 
     if (!validateParams(req, context.log)) {
