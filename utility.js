@@ -21,14 +21,14 @@ module.exports.parseParams = (req, logger) => {
     logger(`accessToken: ${accessToken}`);
     logger(`resourcesRaw: ${JSON.stringify(resourcesRaw)}`);
 
-    resourcesRaw = resourcesRaw.split(',');
     let resources = [];
-
 
     let i;
     let regexMatch;
     for (i = 0; i < resourcesRaw.length; i++) {
+        logger(`... working on ${resourcesRaw[i]}`);
         regexMatch = resourcesRaw[i].match(/(\w+)\/(\w+)\/(\w+)/);
+        logger(regexMatch);
         resources.push({
             subscriptionId: regexMatch[1],
             resourceGroupName: regexMatch[2],
