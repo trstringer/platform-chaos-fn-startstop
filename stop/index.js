@@ -1,9 +1,19 @@
-const validateParams = require('../utility').validateParams;
+const utility = require('../utility');
+const webSiteManagementClient = require('azure-arm-website');
+
+function startWebSite(credential, subscriptionId, resourceGroupName, resourceName, logger) {
+    const client = new webSiteManagementClient(credential, subscriptionId);
+    logger(`Starting web app ${resourceName} in resource group ${resourceGroupName}`);
+    return client.webApps.start(
+        resourceGroupName,
+        resourceName
+    );
+}
 
 module.exports = function (context, req) {
     context.log('Beginning stop of chaos event');
 
-    if (!validateParams(req, context.log)) {
+    if (!utility.validateParams(req, context.log)) {
         context.res = {
             status: 400,
             body: "Required params are accessToken and resources"
@@ -12,6 +22,24 @@ module.exports = function (context, req) {
     }
     else {
         context.log('Parameter validation passed');
-        context.done();
+        context.log('Starting websites');
+        const parsedParams = utility.parseParams(req, context.log);
+        const credential = utility.generateCredential(parsedParams.accessToken);
+        Promise.all(parsedParams.resources.map(resource => startWebSite(
+                credential,
+                resource.subscriptionId,
+                resource.resourceGroupName,
+                resource.resourceName,
+                context.log
+        )))
+            .then(() => {
+                context.log('Completed starting websites');
+                context.done();
+            })
+            .catch(err => {
+                context.log('Error starting websites');
+                context.log(err);
+                context.done();
+            });
     }
 };
