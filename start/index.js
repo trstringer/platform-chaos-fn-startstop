@@ -22,4 +22,8 @@ module.exports = function (context, req) {
         };
         context.done();
     }
+    else {
+        context.log('Parameter validation passed');
+        context.done();
+    }
 };
