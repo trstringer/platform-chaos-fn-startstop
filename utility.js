@@ -12,10 +12,13 @@ module.exports.validateParams = (req, logger) => {
     return true;
 };
 
-module.exports.parseParams = (req) => {
+module.exports.parseParams = (req, logger) => {
     const accessToken = req.query.accessToken || req.body.accessToken;
     const resourcesRaw = req.query.resources || req.body.resources;
     let resources = [];
+
+    logger(`accessToken: ${accessToken}`);
+    logger(`resourcesRaw: ${resourcesRaw}`);
 
     let i;
     let regexMatch;
