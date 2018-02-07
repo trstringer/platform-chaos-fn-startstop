@@ -16,6 +16,8 @@ module.exports.parseParams = (req, logger) => {
     const accessToken = req.query.accessToken || req.body.accessToken;
     let resourcesRaw = req.query.resources || req.body.resources;
 
+    logger(`typeof resourcesRaw: ${typeof resourcesRaw}`);
+
     logger(`accessToken: ${accessToken}`);
     logger(`resourcesRaw: ${resourcesRaw}`);
 
