@@ -2,7 +2,7 @@ const utility = require('../utility');
 const webSiteManagementClient = require('azure-arm-website');
 
 function stopWebSite(credential, subscriptionId, resourceGroupName, resourceName, logger) {
-    const client = webSiteManagementClient(credential, subscriptionId);
+    const client = new webSiteManagementClient(credential, subscriptionId);
     logger(`Stopping web app ${resourceName} in resource group ${resourceGroupName}`);
     return client.webApps.stop(
         resourceGroupName,
