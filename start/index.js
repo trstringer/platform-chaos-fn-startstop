@@ -15,7 +15,7 @@ function validateParams(req, logger) {
 }
 
 module.exports = function (context, req) {
-    testFunc();
+    testFunc(context.log);
     context.log('Beginning start of chaos event');
 
     if (!validateParams(req, context.log)) {
