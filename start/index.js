@@ -1,3 +1,5 @@
+const testFunc = require('../utility').testFunc;
+
 function validateParams(req, logger) {
     if (!req.query.accessToken && !(req.body && req.body.accessToken)) {
         logger('accessToken not passed');
@@ -13,6 +15,7 @@ function validateParams(req, logger) {
 }
 
 module.exports = function (context, req) {
+    testFunc();
     context.log('Beginning start of chaos event');
 
     if (!validateParams(req, context.log)) {
