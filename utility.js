@@ -11,3 +11,31 @@ module.exports.validateParams = (req, logger) => {
 
     return true;
 };
+
+module.exports.parseParams = (req) => {
+    const accessToken = req.query.accessToken || req.body.accessToken;
+    const resourcesRaw = req.query.resources || req.body.resources;
+    let resources = [];
+
+    let i;
+    let regexMatch;
+    for (i = 0; i < resourcesRaw.length; i++) {
+        regexMatch = resourcesRaw[i].match(/(\w+)\/(\w+)\/(\w+)/);
+        resources.push({
+            subscriptionId: regexMatch[1],
+            resourceGroupName: regexMatch[2],
+            resourceName: regexMatch[3]
+        });
+    }
+
+    return {
+        accessToken,
+        resources
+    };
+};
+
+module.exports.generateCredential = (accessToken) => {
+    return {
+        accessToken
+    };
+};
