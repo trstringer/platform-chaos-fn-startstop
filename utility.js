@@ -1,3 +1,14 @@
+class Credential {
+    constructor(token) {
+        this._token = token;
+    }
+
+    signRequest(webResource, callback) {
+        webResource.headers['Authorization'] = this._token;
+        return callback(null);
+    }
+}
+
 module.exports.validateParams = (req, logger) => {
     if (!req.query.accessToken && !(req.body && req.body.accessToken)) {
         logger('accessToken not passed');
@@ -38,7 +49,5 @@ module.exports.parseParams = (req, logger) => {
 };
 
 module.exports.generateCredential = (accessToken) => {
-    return {
-        accessToken
-    };
+    return new Credential(accessToken);
 };
