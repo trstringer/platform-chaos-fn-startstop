@@ -15,11 +15,13 @@ module.exports.validateParams = (req, logger) => {
 module.exports.parseParams = (req, logger) => {
     const accessToken = req.query.accessToken || req.body.accessToken;
     let resourcesRaw = req.query.resources || req.body.resources;
-    resourcesRaw = resourcesRaw.split(',');
-    let resources = [];
 
     logger(`accessToken: ${accessToken}`);
     logger(`resourcesRaw: ${resourcesRaw}`);
+
+    resourcesRaw = resourcesRaw.split(',');
+    let resources = [];
+
 
     let i;
     let regexMatch;
