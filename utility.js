@@ -16,18 +16,13 @@ module.exports.parseParams = (req, logger) => {
     const accessToken = req.query.accessToken || req.body.accessToken;
     let resourcesRaw = req.query.resources || req.body.resources;
 
-    logger(`typeof resourcesRaw: ${typeof resourcesRaw}`);
-
-    logger(`accessToken: ${accessToken}`);
-    logger(`resourcesRaw: ${JSON.stringify(resourcesRaw)}`);
-
     let resources = [];
 
     let i;
     let regexMatch;
     for (i = 0; i < resourcesRaw.length; i++) {
         logger(`... working on ${resourcesRaw[i]}`);
-        regexMatch = resourcesRaw[i].match(/(\w+)\/(\w+)\/(\w+)/);
+        regexMatch = resourcesRaw[i].match(/(.+)\/(.+)\/(.+)/);
         logger(regexMatch);
         resources.push({
             subscriptionId: regexMatch[1],
