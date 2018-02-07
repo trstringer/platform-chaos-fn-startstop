@@ -8,6 +8,8 @@ function validateParams(req, logger) {
         logger('resources not passed');
         return false;
     }
+
+    return true;
 }
 
 module.exports = function (context, req) {
