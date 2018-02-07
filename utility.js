@@ -19,7 +19,7 @@ module.exports.parseParams = (req, logger) => {
     logger(`typeof resourcesRaw: ${typeof resourcesRaw}`);
 
     logger(`accessToken: ${accessToken}`);
-    logger(`resourcesRaw: ${resourcesRaw}`);
+    logger(`resourcesRaw: ${JSON.stringify(resourcesRaw)}`);
 
     resourcesRaw = resourcesRaw.split(',');
     let resources = [];
