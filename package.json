@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "azure-arm-website": "^3.0.0-preview"
+    "azure-arm-website": "^3.0.0-preview",
+    "azure-chaos-fn": "^2.0.0"
   },
   "devDependencies": {},
   "scripts": {

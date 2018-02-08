@@ -1,4 +1,4 @@
-const utility = require('../utility');
+const chaosFnUtility = require('azure-chaos-fn');
 const webSiteManagementClient = require('azure-arm-website');
 
 function stopWebSite(credential, subscriptionId, resourceGroupName, resourceName, logger) {
@@ -13,7 +13,7 @@ function stopWebSite(credential, subscriptionId, resourceGroupName, resourceName
 module.exports = function (context, req) {
     context.log('Beginning start of chaos event');
 
-    if (!utility.validateParams(req, context.log)) {
+    if (!chaosFnUtility.validateParams(req, context.log)) {
         context.res = {
             status: 400,
             body: "Required params are accessToken and resources"
@@ -23,8 +23,8 @@ module.exports = function (context, req) {
     else {
         context.log('Parameter validation passed');
         context.log('Stopping websites');
-        const parsedParams = utility.parseParams(req, context.log);
-        const credential = utility.generateCredential(parsedParams.accessToken);
+        const parsedParams = chaosFnUtility.parseParams(req, context.log);
+        const credential = chaosFnUtility.generateCredential(parsedParams.accessToken);
         Promise.all(parsedParams.resources.map(resource => stopWebSite(
                 credential,
                 resource.subscriptionId,
