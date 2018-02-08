@@ -23,9 +23,9 @@ module.exports = function (context, req) {
     else {
         context.log('Parameter validation passed');
         context.log('Stopping websites');
-        const parsedParams = chaosFnUtility.parseParams(req, context.log);
-        const credential = chaosFnUtility.generateCredential(parsedParams.accessToken);
-        Promise.all(parsedParams.resources.map(resource => stopWebSite(
+        const credential = chaosFnUtility.parsers.accessTokenToCredentials(req);
+        const resources = chaosFnUtility.parsers.resourcesToObjects(req);
+        Promise.all(resources.map(resource => stopWebSite(
                 credential,
                 resource.subscriptionId,
                 resource.resourceGroupName,
