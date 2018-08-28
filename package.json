@@ -5,7 +5,10 @@
   "main": "main.js",
   "dependencies": {
     "azure-arm-website": "^3.0.0-preview",
-    "azure-chaos-fn": "^2.0.0"
+    "azure-chaos-fn": "^2.0.0",
+    "hoek": "^5.0.4",
+    "moment": "^2.22.2",
+    "sshpk": "^1.14.2"
   },
   "devDependencies": {},
   "scripts": {
