@@ -1,19 +1,11 @@
 {
-  "name": "chaos02",
+  "name": "platform-chaos-extension-startstop-webapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "A platform chaos extension that starts and stops Azure App Services Web Applications",
   "dependencies": {
     "azure-arm-website": "^3.0.0-preview",
-    "azure-chaos-fn": "^2.0.0",
-    "hoek": "^5.0.4",
-    "moment": "^2.22.2",
-    "sshpk": "^1.14.2"
+    "platform-chaos": "^1.0.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Thomas Stringer",
   "license": "ISC"
 }

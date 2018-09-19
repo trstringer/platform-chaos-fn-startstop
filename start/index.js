@@ -1,4 +1,4 @@
-const chaosFnUtility = require('azure-chaos-fn');
+const chaosFnUtility = require('platform-chaos');
 const webSiteManagementClient = require('azure-arm-website');
 
 function stopWebSite(credential, subscriptionId, resourceGroupName, resourceName, logger) {
@@ -11,8 +11,8 @@ function stopWebSite(credential, subscriptionId, resourceGroupName, resourceName
 }
 
 module.exports = function (context, req) {
+    chaosFnUtility.auditer.initialize(context, { eventName: 'stopWebSite', resources: req.body.resources.join(',')})
     context.log('Beginning start of chaos event');
-
     context.log('Stopping websites');
     const credential = chaosFnUtility.parsers.accessTokenToCredentials(req);
     const resources = chaosFnUtility.parsers.resourcesToObjects(req);
